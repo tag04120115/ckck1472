@@ -1,8 +1,6 @@
 const { Client } = require('pg');
 
-// Supabase Database Connection String
-// 형식: postgresql://postgres:[비밀번호]@db.[프로젝트참조ID].supabase.co:5432/postgres
-const connectionString = process.env.DATABASE_URL || 'YOUR_SUPABASE_POSTGRES_CONNECTION_STRING';
+const connectionString = process.env.DATABASE_URL || 'postgresql://postgres.lpxowhmcbeaszaiehxdv:ckck1472@aws-0-ap-northeast-2.pooler.supabase.com:6543/postgres';
 
 if (connectionString === 'YOUR_SUPABASE_POSTGRES_CONNECTION_STRING') {
     console.error("Error: 'YOUR_SUPABASE_POSTGRES_CONNECTION_STRING' 부분을 본인의 Supabase PostgreSQL 연결 문자열로 변경해 주세요.");

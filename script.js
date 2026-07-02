@@ -215,8 +215,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 7. Supabase Database Connection & Inquiry Submission
     // [설정 방법] Supabase 대시보드 프로젝트 설정 -> API에서 URL과 anon public key를 복사하여 아래에 채워주세요.
-    const SUPABASE_URL = 'YOUR_SUPABASE_PROJECT_URL'; 
-    const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+    const SUPABASE_URL = 'https://lpxowhmcbeaszaiehxdv.supabase.co'; 
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxweG93aG1jYmVhc3phaWVoeGR2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI1NTQ0OTMsImV4cCI6MjA5ODEzMDQ5M30.HF-fzoX_Doh7vg6jhjMr2y0PTJBMvkK3xbo4jXPf2mw';
     
     let supabase = null;
     
@@ -248,8 +248,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (!isSupabaseConfigured || !supabase) {
-                showToast("DB 설정이 필요합니다. (script.js 파일 수정 필요)");
-                console.warn("Supabase is not configured yet. Set SUPABASE_URL and SUPABASE_ANON_KEY in script.js.");
+                showToast("DB 설정이 필요합니다. (script.js 파일의 SUPABASE_ANON_KEY 설정 필요)");
+                console.warn("Supabase is not configured yet. Set SUPABASE_ANON_KEY in script.js.");
                 return;
             }
 
@@ -270,16 +270,17 @@ document.addEventListener('DOMContentLoaded', () => {
                             email: emailVal || null, 
                             inquiry_type: typeVal, 
                             message: messageVal 
+                            // status: 'pending' (DB default)
                         }
                     ]);
 
                 if (error) throw error;
 
-                showToast("상담 신청이 성공적으로 전달되었습니다.");
+                showToast("문의가 접수되었습니다.");
                 inquiryForm.reset();
             } catch (err) {
                 console.error("Supabase insert error:", err);
-                showToast("전송에 실패했습니다: " + (err.message || "네트워크 오류"));
+                showToast("저장 중 문제가 발생했습니다. 다시 시도해주세요.");
             } finally {
                 // Restore button
                 submitBtn.disabled = false;
